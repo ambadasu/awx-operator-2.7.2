@@ -6,18 +6,23 @@ namespace: awx
 # "wordpress" becomes "alices-wordpress".
 # Note that it should also match with the prefix (text before '-') of the namespace
 # field above.
-namePrefix: awx-operator-
+#namePrefix: awx-operator-
 
 # Labels to add to all resources and selectors.
 #labels:
 #- includeSelectors: true
 #  pairs:
 #    someName: someValue
-
 resources:
-- ../crd
-- ../rbac
-- ../manager
+  - github.com/ambadasu/awx-operator-2.7.2/config/default?ref=2.7.2
+
+images:
+  - name: docker.io/ambadasu/awx-operator
+    newTag: 2.7.2
+#resources:
+#- ../crd
+#- ../rbac
+#- ../manager
 # [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
 #- ../prometheus
 
@@ -26,5 +31,5 @@ resources:
 # endpoint w/o any authn/z, please comment the following line.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-patches:
-- path: manager_auth_proxy_patch.yaml
+  #patches:
+  #- path: manager_auth_proxy_patch.yaml
