@@ -13,17 +13,13 @@ namespace: awx
 #- includeSelectors: true
 #  pairs:
 #    someName: someValue
-resources:
-  - github.com/ambadasu/awx-operator-2.7.2/config/default?ref=2.7.2
 
-images:
-  - name: docker.io/ambadasu/awx-operator
-    newTag: 2.7.2
-#resources:
-#- ../crd
-#- ../rbac
-#- ../manager
-# [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
+resources:
+- ../crd
+- ../rbac
+- ../manager
+
+  # [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
 #- ../prometheus
 
 # Protect the /metrics endpoint by putting it behind auth.
@@ -31,5 +27,5 @@ images:
 # endpoint w/o any authn/z, please comment the following line.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-  #patches:
-  #- path: manager_auth_proxy_patch.yaml
+patches:
+- path: manager_auth_proxy_patch.yaml
